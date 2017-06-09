@@ -90,10 +90,6 @@ public class CameraView extends Activity implements SurfaceHolder.Callback, View
                     } else if (CaptureCameraImage.cameraID == 1) {
                         partFilename = "frontCapture_" + String.valueOf(System.currentTimeMillis()) + "_" ;
                     }
-
-//                    frontCapture_<AlarmTriggerEpochTime>_<CaptureEpochTime>_<deviceId>_<latitude>_<longitude>.jpg
-//                    backCapture_<AlarmTriggerEpochTime>_<CaptureEpochTime>_<deviceId><latitude>_<longitude>.jpg
-
                     storeCameraPhotoInSDCard(resizedBitmap, partFilename);
 
 //                    String storeFilename = "photo_" + partFilename + ".jpg";
@@ -153,7 +149,7 @@ public class CameraView extends Activity implements SurfaceHolder.Callback, View
     }
 
     private void storeCameraPhotoInSDCard(Bitmap bitmap, String currentDate) {
-        File outputFile = new File(Environment.getExternalStorageDirectory(), "/swisdownloads/frontCapture_" + currentDate + ".jpg");
+        File outputFile = new File(Environment.getExternalStorageDirectory(), "/appdownloads/frontCapture_" + currentDate + ".jpg");
      //   File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "photo_" + currentDate + ".jpg");
 
         try {
