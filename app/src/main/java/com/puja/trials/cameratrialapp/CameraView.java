@@ -148,9 +148,15 @@ public class CameraView extends Activity implements SurfaceHolder.Callback, View
         return currentTimeStamp;
     }
 
-    private void storeCameraPhotoInSDCard(Bitmap bitmap, String currentDate) {
-        File outputFile = new File(Environment.getExternalStorageDirectory(), "/appdownloads/frontCapture_" + currentDate + ".jpg");
-     //   File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "photo_" + currentDate + ".jpg");
+    private void storeCameraPhotoInSDCard(Bitmap bitmap, String fileName) {
+        Log.d(TAG, "In storeCameraPhotoInSDCard");
+
+        File outputFile = new File(Environment.getExternalStorageDirectory(), "/appdownloads/");
+        if (!outputFile.exists()) {
+            outputFile.mkdir();
+            Log.d(TAG, "creating folder - " + outputFile.getPath());
+        }
+        outputFile = new File(Environment.getExternalStorageDirectory(), "/appdownloads/" + fileName + ".jpg");
 
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(outputFile);
@@ -158,11 +164,14 @@ public class CameraView extends Activity implements SurfaceHolder.Callback, View
             fileOutputStream.flush();
             fileOutputStream.close();
         } catch (FileNotFoundException e) {
+            Log.d(TAG, "Exception in storeCameraPhotoInSDCard");
             e.printStackTrace();
         } catch (IOException e) {
+            Log.d(TAG, "Exception in storeCameraPhotoInSDCard");
             e.printStackTrace();
         }
     }
+
     private Bitmap getImageFileFromSDCard(String filename){
         Bitmap bitmap = null;
         File imageFile = new File(Environment.getExternalStorageDirectory() + filename);
